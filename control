@@ -13,8 +13,9 @@ Build-Depends: cdbs (>= 0.4.130~),
                nanopb
 Build-Depends-Indep:
                python3-protobuf,
-               goby3-clang-tool,
-               goby3-interfaces,
+               goby3-clang-tool [amd64],
+               goby3-interfaces [amd64],
+               dccl4-apps [amd64],
                nodejs,
                webpack,
                npm
