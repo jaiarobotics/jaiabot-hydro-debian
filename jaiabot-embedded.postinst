@@ -72,6 +72,20 @@ JAIA_ELECTRONICS_STACK=$RET
 db_get jaiabot-embedded/user_role
 JAIA_USER_ROLE=$RET
 
+db_get jaiabot-embedded/imu_type
+JAIA_IMU_TYPE=$RET
+
+db_get jaiabot-embedded/imu_install_type
+JAIA_IMU_INSTALL_TYPE=$RET
+
+db_get jaiabot-embedded/arduino_type
+JAIA_ARDUINO_TYPE=$RET
+
+db_get jaiabot-embedded/bot_type
+JAIA_BOT_TYPE=$RET
+
+db_get jaiabot-embedded/data_offload_ignore_type
+JAIA_DATA_OFFLOAD_IGNORE_TYPE=$RET
 
 /usr/share/jaiabot/config/gen/systemd.py ${JAIA_TYPE} \
                                          --enable \
@@ -87,7 +101,12 @@ JAIA_USER_ROLE=$RET
                                          ${SYSTEMD_SIM_FLAG} \
 					 --led_type=${JAIA_LED_TYPE} \
 					 --electronics_stack=${JAIA_ELECTRONICS_STACK} \
-                                         --user_role=${JAIA_USER_ROLE}
+					 --user_role=${JAIA_USER_ROLE} \
+					 --imu_type=${JAIA_IMU_TYPE} \
+					 --arduino_type=${JAIA_ARDUINO_TYPE} \
+					 --bot_type=${JAIA_BOT_TYPE} \
+					 --imu_install_type=${JAIA_IMU_INSTALL_TYPE} \
+					 --data_offload_ignore_type=${JAIA_DATA_OFFLOAD_IGNORE_TYPE}
 
 echo "<<<<< Installing and enabling systemd services complete!"
 
@@ -117,11 +136,9 @@ echo ">>>>> Restarting gpsd"
 /bin/systemctl restart gpsd.service
 
 if [ "$JAIA_TYPE" = "bot" ]; then
-    db_get jaiabot-embedded/arduino_type
-    ARDUINO_TYPE=$RET
-    if [[ "$ARDUINO_TYPE" != "none" ]]; then
+    if [[ "$JAIA_ARDUINO_TYPE" != "none" ]]; then
         echo ">>>>> Flashing Arduino ..."
-        /usr/share/jaiabot/arduino/jaiabot_runtime/${ARDUINO_TYPE}/upload.sh
+        /usr/share/jaiabot/arduino/jaiabot_runtime/${JAIA_ARDUINO_TYPE}/upload.sh
         echo "<<<<< Flashing Arduino complete!"
     fi
 fi
@@ -148,6 +165,8 @@ if ! grep -q "alias $alias_name=" /home/jaia/.bashrc; then
 else
   echo "jaiabot-status Alias already exists in /home/jaia/.bashrc"
 fi
+
+echo "jaiabot-embedded version: $(dpkg-query --show --showformat='${Version}' jaiabot-embedded)" > /etc/jaiabot/software_version
 
 #DEBHELPER#
 

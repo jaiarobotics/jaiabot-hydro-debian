@@ -8,13 +8,14 @@ Build-Depends: cdbs (>= 0.4.130~),
                libgoby3-dev,
                libgoby3-moos-dev,
                libgoby3-gui-dev,
-               goby3-interfaces [amd64],
-               goby3-clang-tool [amd64],
-               dccl4-apps [amd64],
                protobuf-compiler,
                libnanopb-dev,
-               nanopb,
-               python3-protobuf [amd64],
+               nanopb
+Build-Depends-Indep:
+               python3-protobuf,
+               goby3-clang-tool [amd64],
+               goby3-interfaces [amd64],
+               dccl4-apps [amd64],
                nodejs,
                webpack,
                npm
@@ -61,6 +62,8 @@ Section: science
 Architecture: all
 Description: Web UI applications for the Jaiabot Project
  The jaiabot project provides binaries and libraries for the Jaiabot Autonomous Underwater Vehicle: https://www.jaia.tech/
+Replaces: jaiabot-data-vision
+Conflicts: jaiabot-data-vision
 
 Package: jaiabot-arduino
 Depends: ${shlibs:Depends}, ${misc:Depends}, avrdude

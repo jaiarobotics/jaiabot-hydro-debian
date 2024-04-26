@@ -1,3 +1,18 @@
+Template: jaiabot-embedded/debconf_state_common
+Type: select
+Choices: type, fleet_id, led_type, electronics_stack, mode, warp, NEXT
+Description: Choose a common option to edit
+
+Template: jaiabot-embedded/debconf_state_bot
+Type: select
+Choices: BACK, bot_id, arduino_type, imu_type, bot_type, data_offload_ignore_type, imu_install_type, EXIT
+Description: Choose a bot option to edit
+
+Template: jaiabot-embedded/debconf_state_hub
+Type: select
+Choices: BACK, hub_id, user_role, EXIT
+Description: Choose a hub option to edit
+
 Template: jaiabot-embedded/type
 Type: select
 Choices: bot, hub
@@ -69,3 +84,28 @@ Type: select
 Choices: user, advanced, developer
 Default: user
 Description: The user role to be set in the Upgrade UI (this sets which Ansible playbooks are visible to the user).
+
+Template: jaiabot-embedded/imu_type
+Type: select
+Choices: bno055, bno085, none
+Default: bno055
+Description: What type of imu does your system have?
+
+Template: jaiabot-embedded/bot_type
+Type: select
+Choices: hydro, echo, none
+Default: none
+Description: What type of bot is your system?
+
+Template: jaiabot-embedded/data_offload_ignore_type
+Type: select
+Choices: goby, taskpacket, none
+Default: none
+Description: What data types to ignore when sending data to the hub?
+
+Template: jaiabot-embedded/imu_install_type
+Type: select
+Choices: embedded, retrofit, none
+Default: embedded
+Description: What type of imu installation does your system have?
+

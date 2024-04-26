@@ -6,15 +6,6 @@ a2dissite 000-default || true
 # enable JCC site in apache2
 a2ensite jcc
 
-# Check if the jaia_cockpit_extension exists
-if [ ! -d "/usr/share/jaiabot/web/jaia_cockpit_extension" ]; then
-  echo "Jaia_cockpit_extension directory does not exist."
-else
-  echo "Copying Jaia_cockpit_extension to /usr/share/cockpit/."
-  # Copy the jaia cockpit extension
-  cp -r /usr/share/jaiabot/web/jaia_cockpit_extension /usr/share/cockpit/
-fi
-
 #DEBHELPER#
 
 exit 0
