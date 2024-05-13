@@ -64,6 +64,7 @@ Description: Fleet identification number
 
 Template: jaiabot-embedded/arduino_type
 Type: select
+Default: none
 Choices: spi, usb, none
 Description: What type of Arduino connection does this bot have?
 
