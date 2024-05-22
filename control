@@ -73,7 +73,7 @@ Description: Compiled Arduino sketches for the Jaiabot Project
  The jaiabot project provides binaries and libraries for the Jaiabot Autonomous Underwater Vehicle: https://www.jaia.tech/
 
 Package: jaiabot-config
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3-netifaces
 Section: science
 Architecture: all
 Description: Runtime configuration generation for the Jaiabot Project applications
