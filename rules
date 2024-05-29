@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+# LTO is causing issues with Clang on Ubuntu Noble - this can be removed once this bug is closed: https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-18/+bug/2064187
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto
+
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/cmake.mk
 
@@ -30,6 +33,3 @@ $(info $$DEB_CMAKE_EXTRA_FLAGS is [${DEB_CMAKE_EXTRA_FLAGS}])
 
 CC=/usr/bin/clang 
 CXX=/usr/bin/clang++
-
-# LTO is causing issues with Clang on Ubuntu Noble - this can be removed once this bug is closed: https://bugs.launchpad.net/ubuntu/+source/llvm-toolchain-18/+bug/2064187
-export DEB_BUILD_MAINT_OPTIONS=optimize=-lto
